@@ -1,0 +1,11 @@
+.app {
+	padding: 0 20px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.currency-table-wrapper {
+	width: 100%;
+	display: flex;
+	overflow: hidden;
+}
