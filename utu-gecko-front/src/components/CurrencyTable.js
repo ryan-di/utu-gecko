@@ -29,7 +29,18 @@ export default function CurrencyTable(props) {
 				<tr>
 					<th>#</th>
 					{props.order.map((o) => (
-						<th key={uniqueKeygen(3)}>{o}</th>
+						<th
+							className={`
+								${o === 'Currency' ? 'name-th' : 'number-th'}
+								${o === props.prop ? 'current-th' : ''}
+								`}
+							key={uniqueKeygen(3)}
+							onClick={() => {
+								props.sortBy(o);
+							}}
+						>
+							{o}
+						</th>
 					))}
 				</tr>
 			</thead>
