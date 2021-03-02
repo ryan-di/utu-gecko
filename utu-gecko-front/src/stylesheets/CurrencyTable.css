@@ -1,33 +1,7 @@
-table {
-	font-size: 14px;
-	border-collapse: collapse;
-	display: block;
-	margin: 0 auto;
-	overflow-x: scroll;
-}
-
 .name {
 	text-align: left;
 	cursor: pointer;
 	text-decoration: underline;
-}
-
-td,
-th {
-	padding: 10px;
-	text-align: right;
-	margin: 0;
-}
-
-tbody tr:nth-child(2n) {
-	background-color: #eee;
-}
-
-th {
-	position: sticky;
-	top: 0;
-	background-color: #333;
-	color: white;
 }
 
 .number-th {

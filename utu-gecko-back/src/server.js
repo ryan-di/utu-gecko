@@ -138,17 +138,6 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
-app.get('/coin/:name/:date', (req, res) => {
-	if (!checkDate(req.params.date)) {
-		res.status(404).json({
-			status: 404,
-			msg: 'Not Found.',
-		});
-	} else {
-		res.sendFile(path.join(__dirname, '/build/index.html'));
-	}
-});
-
 // 404
 app.get('*', (req, res) => {
 	res.status(404).json({

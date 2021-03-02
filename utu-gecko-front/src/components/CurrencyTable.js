@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../stylesheets/CurrencyTable.css';
 
 const uniqueKeygen = require('unique-keygen');
@@ -8,18 +7,21 @@ function CurrencyRow(props) {
 	return (
 		<tr className="data-row">
 			<td>{props.index}</td>
-			{props.order.map((o) => {
+			{props.order.map((key) => {
 				return (
-					<td key={uniqueKeygen(5)} className={o === 'Currency' ? 'name' : ''}>
-						{o === 'Price' || o === 'Market Cap' ? '$' : ''}
-						{typeof props.data[o] === 'number' ? (
-							formatNum(Math.round(props.data[o] * 100) / 100)
+					<td
+						key={uniqueKeygen(5)}
+						className={key === 'Currency' ? 'name' : ''}
+					>
+						{key === 'Price' || key === 'Market Cap' ? '$' : ''}
+						{typeof props.data[key] === 'number' ? (
+							formatNum(Math.round(props.data[key] * 100) / 100)
 						) : (
-							<Link to={`/coin/${props.data[o]}/${props.date}`}>
-								{props.data[o]}
-							</Link>
+							<span onClick={() => props.displayCoinData(props.data[key])}>
+								{props.data[key]}
+							</span>
 						)}
-						{['24h', '7d', '30d', 'All'].includes(o) ? '%' : ''}
+						{['24h', '7d', '30d', 'All'].includes(key) ? '%' : ''}
 					</td>
 				);
 			})}
@@ -54,7 +56,7 @@ export default function CurrencyTable(props) {
 					)}
 				</tr>
 			</thead>
-			<tbody>
+			<tbody className="tbody-wrapper">
 				{props.data.map((d, index) => (
 					<CurrencyRow
 						data={d}
@@ -62,6 +64,7 @@ export default function CurrencyTable(props) {
 						key={d.Currency}
 						order={props.order}
 						index={index + 1}
+						displayCoinData={props.displayCoinData}
 					/>
 				))}
 			</tbody>
