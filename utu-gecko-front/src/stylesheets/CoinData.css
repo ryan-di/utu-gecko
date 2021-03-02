@@ -1,5 +1,6 @@
 .coin-records-container {
 	margin: 0 auto;
+	margin-bottom: 100px;
 	text-align: center;
 	z-index: 3;
 }
@@ -11,11 +12,7 @@
 	display: flex;
 	overflow: auto;
 	z-index: 3;
-}
-
-.table-wrapper th,
-.table-wrapper td {
-	padding: 20px;
+	margin-bottom: 100px;
 }
 
 .back-ctrl {
