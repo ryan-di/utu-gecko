@@ -1,9 +1,11 @@
 const express = require('express');
 const { StatsProxy, DataProxy } = require('./query');
 const { checkDate, getDays } = require('./utilities');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '/build')));
 
 const statsProxy = StatsProxy();
 const dataProxy = DataProxy();
@@ -136,6 +138,10 @@ app.use(function (req, res, next) {
 		status: 404,
 		msg: '404 Not Found',
 	});
+});
+
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
 app.listen(8000, () => {
