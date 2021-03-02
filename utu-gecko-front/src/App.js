@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
 	const [latestStats, setLatestStats] = useState([]);
+	const [msg, setMSG] = useState('loading...');
 	const [date, setDate] = useState('');
 	const [prop, setProp] = useState('Market Cap');
 	const [update] = useState(true);
@@ -22,8 +23,10 @@ function App() {
 					});
 					setLatestStats(stats);
 					setDate(data.date);
+					setMSG('');
 				})
 				.catch((error) => {
+					setMSG('Something went wrong. Please try again later.');
 					console.log(error);
 				});
 		}
@@ -42,27 +45,31 @@ function App() {
 	return (
 		<div className="app">
 			<h1>CryptoCurrency Prices</h1>
-			<h2>{date !== '' ? `Latest date: ${date}` : 'Loading...'}</h2>
-			<div className="currency-table-wrapper">
-				<CurrencyTable
-					data={latestStats}
-					order={[
-						'Currency',
-						'Price',
-						'24h',
-						'7d',
-						'30d',
-						'Volume',
-						'Market Cap',
-					]}
-					date={date}
-					prop={prop}
-					sortBy={(p) => {
-						sortBy(p);
-					}}
-				/>
-				{console.log('re-rendered')}
-			</div>
+			{date !== '' ? <h2>{date}</h2> : ''}
+			{msg !== '' ? (
+				<h3>{msg}</h3>
+			) : (
+				<div className="currency-table-wrapper">
+					<CurrencyTable
+						data={latestStats}
+						order={[
+							'Currency',
+							'Price',
+							'24h',
+							'7d',
+							'30d',
+							'Volume',
+							'Market Cap',
+						]}
+						date={date}
+						prop={prop}
+						sortBy={(p) => {
+							sortBy(p);
+						}}
+					/>
+					{console.log('re-rendered')}
+				</div>
+			)}
 		</div>
 	);
 }

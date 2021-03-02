@@ -231,8 +231,11 @@ function fetchDataFrom(date, duration) {
 function getLatestRecordsByDate(duration) {
 	return new Promise((resolve, reject) => {
 		const client = getDBClient();
-		try {
-			client.connect(async (error) => {
+		client.connect(async (error) => {
+			if (error) {
+				console.log('failed to connect to atlas to get latest records');
+				reject(error);
+			} else {
 				const db = client.db(DBInfo.name);
 				const collection = db.collection(DBInfo.collections.byDate);
 				let records = await collection
@@ -245,12 +248,8 @@ function getLatestRecordsByDate(duration) {
 					)
 					.toArray();
 				resolve(records);
-			});
-		} catch (e) {
-			reject(e);
-		} finally {
-			client.close();
-		}
+			}
+		});
 	});
 }
 
