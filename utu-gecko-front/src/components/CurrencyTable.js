@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './CurrencyTable.css';
 
 const uniqueKeygen = require('unique-keygen');
@@ -11,9 +12,13 @@ function CurrencyRow(props) {
 				return (
 					<td key={uniqueKeygen(5)} className={o === 'Currency' ? 'name' : ''}>
 						{o === 'Price' || o === 'Market Cap' ? '$' : ''}
-						{typeof props.data[o] === 'number'
-							? formatNum(Math.round(props.data[o] * 100) / 100)
-							: props.data[o]}
+						{typeof props.data[o] === 'number' ? (
+							formatNum(Math.round(props.data[o] * 100) / 100)
+						) : (
+							<Link to={`/coin/${props.data[o]}/${props.date}`}>
+								{props.data[o]}
+							</Link>
+						)}
 						{['24h', '7d', '30d', 'All'].includes(o) ? '%' : ''}
 					</td>
 				);
@@ -48,6 +53,7 @@ export default function CurrencyTable(props) {
 				{props.data.map((d, index) => (
 					<CurrencyRow
 						data={d}
+						date={props.date}
 						key={d.Currency}
 						order={props.order}
 						index={index + 1}

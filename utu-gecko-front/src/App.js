@@ -55,6 +55,7 @@ function App() {
 						'Volume',
 						'Market Cap',
 					]}
+					date={date}
 					prop={prop}
 					sortBy={(p) => {
 						sortBy(p);

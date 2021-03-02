@@ -1,15 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	useLocation,
+} from 'react-router-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CoinPage from './components/CoinPage';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<Router>
+			<Switch>
+				<Route path="/" component={App} exact />
+				<Route path="/coin/:name/:date" component={CoinPage} exact />
+				<Route path="/api/" />
+				<Route path="*">
+					<NoMatch />
+				</Route>
+			</Switch>
+		</Router>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
+
+function NoMatch() {
+	let location = useLocation();
+
+	return (
+		<div>
+			<h3>
+				No match for <code>{location.pathname}</code>
+			</h3>
+		</div>
+	);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
