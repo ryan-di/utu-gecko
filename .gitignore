@@ -1,3 +1,8 @@
-node_modules
-utu-gecko-front/node_modules
-src/config.js
+utu-gecko-back/node_modules/
+utu-gecko-back/src/config.js
+utu-gecko-back/src/data/*.json
+utu-gecko-back/package-lock.json
+
+utu-gecko-front/node_modules/
+utu-gecko-front/build/
+utu-gecko-front/package.json

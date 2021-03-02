@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import './CoinPage.css';
+import '../stylesheets/CoinPage.css';
 const uniqueKeygen = require('unique-keygen');
 
 export default function CoinPage() {
@@ -28,8 +28,9 @@ export default function CoinPage() {
 	return (
 		<div>
 			<h1>
-				Latest stats for <span style={{ color: 'goldenrod' }}>{name}</span>
+				Latest data for <span style={{ color: 'goldenrod' }}>{name}</span>
 			</h1>
+			<h2>From {date}</h2>
 			{msg === '' ? (
 				<div className="table-wrapper">
 					<table>

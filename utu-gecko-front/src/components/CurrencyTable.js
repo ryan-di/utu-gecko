@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './CurrencyTable.css';
+import '../stylesheets/CurrencyTable.css';
 
 const uniqueKeygen = require('unique-keygen');
 
@@ -33,20 +33,25 @@ export default function CurrencyTable(props) {
 			<thead>
 				<tr>
 					<th>#</th>
-					{props.order.map((o) => (
-						<th
-							className={`
-								${o === 'Currency' ? 'name-th' : 'number-th'}
+					<th>Currency</th>
+					{props.order.map((o) =>
+						o !== 'Currency' ? (
+							<th
+								className={`
+								number-th
 								${o === props.prop ? 'current-th' : ''}
 								`}
-							key={uniqueKeygen(3)}
-							onClick={() => {
-								props.sortBy(o);
-							}}
-						>
-							{o}
-						</th>
-					))}
+								key={uniqueKeygen(3)}
+								onClick={() => {
+									props.sortBy(o);
+								}}
+							>
+								{o}
+							</th>
+						) : (
+							''
+						)
+					)}
 				</tr>
 			</thead>
 			<tbody>

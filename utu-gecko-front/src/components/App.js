@@ -1,36 +1,33 @@
-import './App.css';
-import CurrencyTable from './components/CurrencyTable';
+import '../stylesheets/App.css';
+import CurrencyTable from './CurrencyTable';
 import { useEffect, useState } from 'react';
 
 function App() {
 	const [latestStats, setLatestStats] = useState([]);
-	const [msg, setMSG] = useState('loading...');
+	const [msg, setMSG] = useState('Loading...');
 	const [date, setDate] = useState('');
 	const [prop, setProp] = useState('Market Cap');
-	const [update] = useState(true);
 
 	useEffect(() => {
-		if (update) {
-			fetch('/api/stats/')
-				.then((res) => {
-					if (res.ok) return res.json();
-					else throw Error('Something went wrong');
-				})
-				.then((data) => {
-					const k = 'Market Cap';
-					const stats = data.stats.sort((a, b) => {
-						return b[k] - a[k];
-					});
-					setLatestStats(stats);
-					setDate(data.date);
-					setMSG('');
-				})
-				.catch((error) => {
-					setMSG('Something went wrong. Please try again later.');
-					console.log(error);
+		fetch('/api/stats/')
+			.then((res) => {
+				if (res.ok) return res.json();
+				else throw Error('Something went wrong');
+			})
+			.then((data) => {
+				const k = 'Market Cap';
+				const stats = data.stats.sort((a, b) => {
+					return b[k] - a[k];
 				});
-		}
-	}, [update]);
+				setLatestStats(stats);
+				setDate(data.date);
+				setMSG('');
+			})
+			.catch((error) => {
+				setMSG('Something went wrong. Please try again later.');
+				console.log(error);
+			});
+	}, []);
 
 	function sortBy(p) {
 		if (p !== prop) {

@@ -6,8 +6,8 @@ import {
 	Switch,
 	useLocation,
 } from 'react-router-dom';
-import './index.css';
-import App from './App';
+import './stylesheets/index.css';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import CoinPage from './components/CoinPage';
 
@@ -17,10 +17,7 @@ ReactDOM.render(
 			<Switch>
 				<Route path="/" component={App} exact />
 				<Route path="/coin/:name/:date" component={CoinPage} exact />
-				<Route path="/api/" />
-				<Route path="*">
-					<NoMatch />
-				</Route>
+				<Route path="*" component={NoMatch} />
 			</Switch>
 		</Router>
 	</React.StrictMode>,
