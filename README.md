@@ -56,7 +56,7 @@ We do not have the `"30d"` stats since the requested duration is only 10.
 ## Implementations
 For the backend, we have 
 - `db.js`: returns a method that's gonna give us a MongoDB client object, which we can use to connect to the database and perform queries.
-- `data-process.js`: initial process to populate the MongoDB Atlas database; data is replicated into two collections, one by date, and the other is simply stores each record.
+- `data-process.js`: initial process to populate the MongoDB Atlas database; data is replicated into two collections, one by date, and another that simply stores each record.
 - `query.js`: returns two query proxies, which `server.js` can use to query and cache results
 - `server.js`: handles the user requests; returns either the HTML page for the built React app or JSON responses.
 
