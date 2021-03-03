@@ -103,5 +103,5 @@ we can determine the cache strategies and invalidation methods accordingly.
 To deal with capacity constraints, I personally favor the LRU Cache data structure, which is both
 simple and effective. 
 
-Having set up the cache servers, when our API deali with user requests, they can first try the caches 
-and then query the database and ask the cache servers to cache the query results if necessary. 
+Having set up the cache servers, when our API servers deal with user requests, they can first try the caches in cache servers
+and then query the database if there werer no cache hits and ask the cache servers to cache the query results if necessary. 
