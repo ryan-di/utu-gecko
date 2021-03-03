@@ -74,9 +74,10 @@ function Proxy() {
       return new Promise((resolve, reject) => {
         // create cacheKey from params
         // check if cache exists
-        //    return the value immediately if available
+        //    resolve the value immediately if available
         // otherwise connect to Atlas and make the necessary queries and processing
-        //    store result in cache and resolve
+        //    store the result in cache and resolve
+        // reject on any error
       })
     },
   
@@ -90,16 +91,17 @@ function Proxy() {
 
 ```
 
-As the app is only for demonstration purpose, cache here does not have a capacity limitation. 
-When we need to deal with capacity, data structures like LRU Cache can be adopted.
+As the app is only for demonstration purpose, cache in each query proxy does not have a capacity limitation. 
+When we need to deal with capacity, data structures like LRU Cache with a predetermined or dynamic capacity can be adopted.
 
 Now, in real use cases where records are being continuously inserted in the database, 
 we surely need to come up with a better caching solution. 
 
-It would be ideal to set up dedicated cache servers and have one or a few servers query the database and 
-update the caches periodically. As for the cache invalidation methods, I personally favor LRU Cache, which is both
-simple and effective. Depending on the actual functional and non-functional requirements, 
-we can then adjust our cache strategy accordingly.
+It would be ideal to set up dedicated cache servers and have them query the database and 
+update the caches periodically. Depending on the actual use cases and requirements, 
+we can determine the cache strategies and invalidation methods accordingly.
+To deal with capacity constraints, I personally favor the LRU Cache data structure, which is both
+simple and effective. 
 
 Having set up the cache servers, when our API deali with user requests, they can first try the caches 
 and then query the database and ask the cache servers to cache the query results if necessary. 
